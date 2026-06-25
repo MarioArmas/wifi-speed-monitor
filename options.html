@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuración - Wifi Speed Monitor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="settings-container">
+    <!-- Header -->
+    <header class="settings-header">
+      <div class="logo-area">
+        <svg class="header-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h.01"></path>
+          <path d="M8.5 16.5a5 5 0 0 1 7 0"></path>
+          <path d="M5 13a10 10 0 0 1 14 0"></path>
+          <path d="M1.5 9.5a15 15 0 0 1 21 0"></path>
+        </svg>
+        <h1>SpeedMonitor</h1>
+      </div>
+      <span class="badge">Configuración</span>
+    </header>
+
+    <!-- Main settings form -->
+    <main class="settings-main bg-glass">
+      <form id="settings-form">
+        
+        <!-- Threshold Speed -->
+        <div class="form-group">
+          <div class="group-header">
+            <label for="min-speed">Umbral Mínimo de Velocidad</label>
+            <span class="value-display"><span id="speed-display">15</span> Mbps</span>
+          </div>
+          <p class="group-description">Te alertará si la velocidad de descarga estimada cae por debajo de este valor.</p>
+          <div class="slider-container">
+            <input type="range" id="min-speed" name="minSpeed" min="1" max="100" value="15" step="1">
+            <div class="slider-labels">
+              <span>1 Mbps</span>
+              <span>50 Mbps</span>
+              <span>100 Mbps</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Threshold Latency -->
+        <div class="form-group">
+          <div class="group-header">
+            <label for="max-latency">Umbral Máximo de Latencia</label>
+            <span class="value-display"><span id="latency-display">80</span> ms</span>
+          </div>
+          <p class="group-description">Te alertará si el tiempo de respuesta RTT supera este valor en milisegundos.</p>
+          <div class="slider-container">
+            <input type="range" id="max-latency" name="maxLatency" min="5" max="300" value="80" step="5">
+            <div class="slider-labels">
+              <span>5 ms</span>
+              <span>150 ms</span>
+              <span>300 ms</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Monitoring Interval -->
+        <div class="form-group">
+          <div class="group-header">
+            <label for="interval">Intervalo de Monitoreo</label>
+          </div>
+          <p class="group-description">Frecuencia con la que se medirán automáticamente la velocidad y la latencia en segundo plano.</p>
+          <div class="select-wrapper">
+            <select id="interval" name="interval">
+              <option value="1">Cada 1 minuto (Solo pruebas)</option>
+              <option value="5">Cada 5 minutos</option>
+              <option value="10">Cada 10 minutos</option>
+              <option value="15" selected>Cada 15 minutos (Recomendado)</option>
+              <option value="30">Cada 30 minutos</option>
+              <option value="60">Cada 1 hora</option>
+            </select>
+            <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="form-actions">
+          <button type="submit" id="btn-save" class="primary-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Guardar Configuración
+          </button>
+        </div>
+      </form>
+    </main>
+
+    <!-- Danger Zone / Data Management -->
+    <section class="danger-zone bg-glass">
+      <h3>Zona de Datos</h3>
+      <p class="danger-description">Elimina todas las mediciones recopiladas e inicializa el contador de alertas de la extensión.</p>
+      
+      <div class="danger-actions">
+        <button id="btn-reset-history" class="danger-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            <line x1="10" y1="11" x2="10" y2="17"></line>
+            <line x1="14" y1="11" x2="14" y2="17"></line>
+          </svg>
+          Limpiar Historial y Alertas
+        </button>
+      </div>
+    </section>
+
+    <!-- Save confirmation toast -->
+    <div id="toast" class="toast hidden">
+      <div class="toast-content">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 8 8 12 12 16"></polyline>
+          <line x1="16" y1="12" x2="8" y2="12"></line>
+        </svg>
+        <span>¡Configuración guardada correctamente!</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

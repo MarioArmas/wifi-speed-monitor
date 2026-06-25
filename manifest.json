@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Wifi Speed & Latency Monitor",
+  "version": "1.0.0",
+  "description": "Monitorea periódicamente la velocidad de descarga y latencia de tu conexión, con alertas del sistema y estadísticas avanzadas.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://speed.cloudflare.com/*",
+    "https://cloudflare.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}
