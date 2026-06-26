@@ -11,7 +11,7 @@ const DEFAULT_SETTINGS = {
 };
 
 const LATENCY_ENDPOINT = 'https://cloudflare.com/cdn-cgi/trace';
-const SPEED_ENDPOINT = 'https://speed.cloudflare.com/__down?bytes=500000'; // 500 KB
+const SPEED_ENDPOINT = 'https://speed.cloudflare.com/__down?bytes=50000000'; // 50 MB
 
 // Al instalarse la extensión, inicializa los valores y configura la alarma
 chrome.runtime.onInstalled.addListener(async (details) => {
